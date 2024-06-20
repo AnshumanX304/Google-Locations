@@ -165,7 +165,7 @@ const App = () => {
           </div>
         </div>
         <div className='w-full md:w-[35%] p-5'>
-          <LoadScript googleMapsApiKey="YOUR_API_KEY">
+          <LoadScript googleMapsApiKey="CUSTOM_KEY">
             <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
               {directions && <DirectionsRenderer directions={directions} />}
             </GoogleMap>
