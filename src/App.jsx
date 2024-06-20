@@ -94,7 +94,7 @@ const App = () => {
   return (
     <div className='bg-[#E9EEF2] w-full h-fit pb-20'>
       <Navbar />
-      <div className="hidden md:block text-center my-8 text-[20px] text-[#1B31A8]">Let's calculate distance from Google maps</div>
+      <div className="hidden md:block text-center my-8 text-[20px] text-[#1B31A8]">Let's calculate <span className=' font-bold'>distance</span> from Google maps</div>
       <div className="flex flex-col-reverse md:flex-row justify-evenly">
         <div className='w-full md:w-[35%] h-fit px-5'>
           <div className='md:flex'>
