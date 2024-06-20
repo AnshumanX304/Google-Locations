@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, DirectionsRenderer } from '@react-google-maps/api';
 import Navbar from './components/Navbar';
 import Add from './images/Add--alt.svg';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 const containerStyle = {
   width: '100%',
@@ -100,7 +101,7 @@ const App = () => {
             <div className='py-5'>
               <label className='text-sm'>Origin</label><br />
               <div className="relative">
-                <i className="fas fa-map-marker-alt absolute left-3 top-3 text-gray-400"></i>
+                <i className="fa-sharp fa-solid fa-circle-dot absolute left-3 top-[18px] text-green-500"></i>
                 <input
                   className='w-full md:w-[250px] pl-10 p-3 mt-1 h-[45px] mb-7 rounded-[6px] border-[1px] border-[#DCDDEC]'
                   name="source"
@@ -113,7 +114,8 @@ const App = () => {
               <label className='text-sm'>Stop</label><br />
               {locations.stops.map((stop, index) => (
                 <div className="relative" key={index}>
-                  <i className="fas fa-map-marker-alt absolute left-3 top-3 text-gray-400"></i>
+                  <i className="fa-sharp fa-solid fa-circle-dot absolute left-3 top-[18px] text-black"></i>
+                  {/* <i class="fa-sharp fa-solid fa-circle-dot"></i> */}
                   <input
                     className='w-full pl-10 h-[45px] mt-1 rounded-[6px] p-3 border-[1px] border-[#DCDDEC]'
                     type="text"
@@ -135,7 +137,7 @@ const App = () => {
               </div>
               <label className='text-sm text-[15px]'>Destination</label><br />
               <div className="relative">
-                <i className="fas fa-map-marker-alt absolute left-3 top-3 text-gray-400"></i>
+                <i className="fas fa-map-marker-alt absolute left-3 top-[19px] text-black"></i>
                 <input
                   className='w-full pl-10 p-3 mt-1 h-[45px] mb-5 rounded-[6px] border-[1px] border-[#DCDDEC]'
                   name="destination"
