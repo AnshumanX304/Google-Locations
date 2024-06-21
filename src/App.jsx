@@ -23,12 +23,13 @@ const App = () => {
 
   const [directions, setDirections] = useState(null);
   const [distance, setDistance] = useState(0);
+  const [travelMode, setTravelMode] = useState('DRIVING');
 
   useEffect(() => {
     if (locations.source && locations.destination) {
       calculateDistance();
     }
-  }, [locations.source, locations.destination, locations.stops]);
+  }, [locations.source, locations.destination, locations.stops, travelMode]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,6 +55,10 @@ const App = () => {
     calculateDistance();
   };
 
+  const handleTravelModeChange = (e) => {
+    setTravelMode(e.target.value);
+  };
+
   const calculateDistance = () => {
     if (locations.source && locations.destination) {
       const directionsService = new window.google.maps.DirectionsService();
@@ -62,7 +67,7 @@ const App = () => {
           origin: locations.source,
           destination: locations.destination,
           waypoints: locations.stops.map(stop => ({ location: stop, stopover: true })),
-          travelMode: window.google.maps.TravelMode.DRIVING,
+          travelMode: window.google.maps.TravelMode[travelMode],
         },
         (result, status) => {
           if (status === window.google.maps.DirectionsStatus.OK) {
@@ -95,7 +100,7 @@ const App = () => {
               <div className="relative">
                 <i className="fa-sharp fa-solid fa-circle-dot absolute left-3 top-[18px] text-green-500"></i>
                 <input
-                  className='w-full md:w-[250px] pl-10 p-3 mt-1 h-[45px] mb-7 rounded-[6px] border-[1px] border-[#DCDDEC]'
+                  className='w-full md:w-[250px] pl-10 p-3 h-[45px] mb-7 rounded-[6px] border-[1px] border-[#DCDDEC]'
                   name="source"
                   value={locations.source}
                   onChange={handleChange}
@@ -108,7 +113,7 @@ const App = () => {
                 <div className="relative flex items-center" key={index}>
                   <i className="fa-sharp fa-solid fa-circle-dot absolute left-3 top-[18px] text-black"></i>
                   <input
-                    className='w-full pl-10 h-[45px] mt-1 rounded-[6px] p-3 border-[1px] border-[#DCDDEC]'
+                    className='w-full pl-10 h-[45px] rounded-[6px] p-3 border-[1px] border-[#DCDDEC]'
                     type="text"
                     value={stop}
                     onChange={(e) => handleStopChange(index, e.target.value)}
@@ -136,13 +141,25 @@ const App = () => {
               <div className="relative">
                 <i className="fas fa-map-marker-alt absolute left-3 top-[19px] text-black"></i>
                 <input
-                  className='w-full pl-10 p-3 mt-1 h-[45px] mb-5 rounded-[6px] border-[1px] border-[#DCDDEC]'
+                  className='w-full pl-10 p-3 h-[45px] mb-5 rounded-[6px] border-[1px] border-[#DCDDEC]'
                   name="destination"
                   value={locations.destination}
                   onChange={handleChange}
                   type="text"
                   placeholder="Destination"
                 />
+              </div>
+              <label className='text-sm hidden md:block mt-10'>Travel Mode</label><br />
+              <div className="relative">
+                <select
+                  className='w-full md:w-[250px] pl-3 h-[45px] mb-7 rounded-[6px] border-[1px] border-r-[10px] border-r-transparent border-[#DCDDEC]'
+                  value={travelMode}
+                  onChange={handleTravelModeChange}
+                >
+                  <option value="DRIVING">Driving</option>
+                  <option value="WALKING">Walking</option>
+                  <option value="BICYCLING">Bicycling</option>
+                </select>
               </div>
             </div>
             <div className='flex lg:justify-end justify-center items-center w-full'>
