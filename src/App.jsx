@@ -98,7 +98,7 @@ const App = () => {
             <div className='py-5'>
               <label className='text-sm hidden md:block'>Origin</label><br />
               <div className="relative">
-                <i className="fa-sharp fa-solid fa-circle-dot absolute left-3 top-[18px] text-green-500"></i>
+                <i className="fa-sharp fa-solid fa-circle-dot absolute left-3 top-[14px] text-green-500"></i>
                 <input
                   className='w-full md:w-[250px] pl-10 p-3 h-[45px] mb-7 rounded-[6px] border-[1px] border-[#DCDDEC]'
                   name="source"
@@ -111,7 +111,7 @@ const App = () => {
               <label className='text-sm hidden md:block'>Stop</label><br />
               {locations.stops.map((stop, index) => (
                 <div className="relative flex items-center" key={index}>
-                  <i className="fa-sharp fa-solid fa-circle-dot absolute left-3 top-[18px] text-black"></i>
+                  <i className="fa-sharp fa-solid fa-circle-dot absolute left-3 top-[14px] text-black"></i>
                   <input
                     className='w-full pl-10 h-[45px] rounded-[6px] p-3 border-[1px] border-[#DCDDEC]'
                     type="text"
@@ -139,7 +139,7 @@ const App = () => {
               </div>
               <label className='text-sm text-[15px] hidden md:block'>Destination</label><br />
               <div className="relative">
-                <i className="fas fa-map-marker-alt absolute left-3 top-[19px] text-black"></i>
+                <i className="fas fa-map-marker-alt absolute left-3 top-[14px] text-black"></i>
                 <input
                   className='w-full pl-10 p-3 h-[45px] mb-5 rounded-[6px] border-[1px] border-[#DCDDEC]'
                   name="destination"
