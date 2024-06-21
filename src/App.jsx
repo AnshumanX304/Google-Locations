@@ -84,9 +84,9 @@ const App = () => {
       </div>
       <div className="flex flex-col-reverse md:flex-row justify-evenly">
         <div className='w-full md:w-[35%] h-fit px-5'>
-          <div className='md:flex'>
+          <div className='lg:flex'>
             <div className='py-5'>
-              <label className='text-sm'>Origin</label><br />
+              <label className='text-sm hidden md:block'>Origin</label><br />
               <div className="relative">
                 <i className="fa-sharp fa-solid fa-circle-dot absolute left-3 top-[18px] text-green-500"></i>
                 <input
@@ -98,7 +98,7 @@ const App = () => {
                   placeholder="Source"
                 />
               </div>
-              <label className='text-sm'>Stop</label><br />
+              <label className='text-sm hidden md:block'>Stop</label><br />
               {locations.stops.map((stop, index) => (
                 <div className="relative" key={index}>
                   <i className="fa-sharp fa-solid fa-circle-dot absolute left-3 top-[18px] text-black"></i>
@@ -121,7 +121,7 @@ const App = () => {
                   </div>
                 </button><br />
               </div>
-              <label className='text-sm text-[15px]'>Destination</label><br />
+              <label className='text-sm text-[15px] hidden md:block'>Destination</label><br />
               <div className="relative">
                 <i className="fas fa-map-marker-alt absolute left-3 top-[19px] text-black"></i>
                 <input
@@ -134,7 +134,7 @@ const App = () => {
                 />
               </div>
             </div>
-            <div className='flex md:justify-end justify-center items-center w-full'>
+            <div className='flex lg:justify-end justify-center items-center w-full'>
               <button className='w-[141px] h-[62px] text-[18px] rounded-[30px] bg-[#1B31A8] text-white ' onClick={handleCalculateRoute}>
                 Calculate
               </button>
@@ -142,8 +142,8 @@ const App = () => {
           </div>
           <div className='border-[1px] border-[#DCDDEC] rounded-[6px] mt-10'>
             <div className='bg-white flex justify-between px-5 w-full py-5 rounded-md'>
-              <div className='text-[18px] md:text-[20px] font-bold pt-2'>Distance</div>
-              <div className='text-[22px] md:text-[30px] text-[#0079FF] font-bold'>{distance} kms</div>
+              <div className='text-[18px] lg:text-[20px] font-bold pt-2'>Distance</div>
+              <div className='text-[22px] lg:text-[30px] text-[#0079FF] py-1 lg:py-0 font-bold'>{distance} kms</div>
             </div>
             <div className='m-5 text-left text-[12px]'>
               The distance between <span className=' font-bold'>{locations.source}</span> and <span className=' font-bold'>{locations.destination}</span> via the selected route is <span className=' font-bold'>{distance}</span> kms.
