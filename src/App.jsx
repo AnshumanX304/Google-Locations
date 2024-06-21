@@ -10,23 +10,25 @@ const containerStyle = {
 };
 
 const center = {
-  lat: -3.745,
-  lng: -38.523
+  lat: 28.679079,
+  lng: 77.069710
 };
 
 const App = () => {
   const [locations, setLocations] = useState({
     source: '',
     destination: '',
-    stops: ['']
+    stops: []
   });
 
   const [directions, setDirections] = useState(null);
   const [distance, setDistance] = useState(0);
 
   useEffect(() => {
-    calculateDistance();
-  }, [locations]);
+    if (locations.source && locations.destination) {
+      calculateDistance();
+    }
+  }, [locations.source, locations.destination, locations.stops]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,24 +46,7 @@ const App = () => {
   };
 
   const handleCalculateRoute = () => {
-    if (locations.source && locations.destination) {
-      const directionsService = new window.google.maps.DirectionsService();
-      directionsService.route(
-        {
-          origin: locations.source,
-          destination: locations.destination,
-          waypoints: locations.stops.map(stop => ({ location: stop, stopover: true })),
-          travelMode: window.google.maps.TravelMode.DRIVING,
-        },
-        (result, status) => {
-          if (status === window.google.maps.DirectionsStatus.OK) {
-            setDirections(result);
-          } else {
-            console.error(`error fetching directions ${result}`);
-          }
-        }
-      );
-    }
+    calculateDistance();
   };
 
   const calculateDistance = () => {
@@ -84,7 +69,7 @@ const App = () => {
             setDistance(totalDistance / 1000);
             setDirections(result);
           } else {
-            console.error(`error fetching directions ${result}`);
+            console.error(`Error fetching directions: ${status}`);
           }
         }
       );
@@ -94,7 +79,9 @@ const App = () => {
   return (
     <div className='bg-[#E9EEF2] w-full h-fit pb-20'>
       <Navbar />
-      <div className="hidden md:block text-center my-8 text-[20px] text-[#1B31A8]">Let's calculate <span className=' font-bold'>distance</span> from Google maps</div>
+      <div className="hidden md:block text-center my-8 text-[20px] text-[#1B31A8]">
+        Let's calculate <span className=' font-bold'>distance</span> from Google maps
+      </div>
       <div className="flex flex-col-reverse md:flex-row justify-evenly">
         <div className='w-full md:w-[35%] h-fit px-5'>
           <div className='md:flex'>
@@ -115,7 +102,6 @@ const App = () => {
               {locations.stops.map((stop, index) => (
                 <div className="relative" key={index}>
                   <i className="fa-sharp fa-solid fa-circle-dot absolute left-3 top-[18px] text-black"></i>
-                  {/* <i class="fa-sharp fa-solid fa-circle-dot"></i> */}
                   <input
                     className='w-full pl-10 h-[45px] mt-1 rounded-[6px] p-3 border-[1px] border-[#DCDDEC]'
                     type="text"
@@ -160,12 +146,12 @@ const App = () => {
               <div className='text-[22px] md:text-[30px] text-[#0079FF] font-bold'>{distance} kms</div>
             </div>
             <div className='m-5 text-left text-[12px]'>
-              The distance between {locations.source} and {locations.destination} via the selected route is {distance} kms.
+              The distance between <span className=' font-bold'>{locations.source}</span> and <span className=' font-bold'>{locations.destination}</span> via the selected route is <span className=' font-bold'>{distance}</span> kms.
             </div>
           </div>
         </div>
         <div className='w-full md:w-[35%] p-5'>
-          <LoadScript googleMapsApiKey="CUSTOM_KEY">
+          <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
             <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
               {directions && <DirectionsRenderer directions={directions} />}
             </GoogleMap>
