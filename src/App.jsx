@@ -45,6 +45,11 @@ const App = () => {
     setLocations({ ...locations, stops: [...locations.stops, ''] });
   };
 
+  const handleDeleteStop = (index) => {
+    const newStops = locations.stops.filter((_, i) => i !== index);
+    setLocations({ ...locations, stops: newStops });
+  };
+
   const handleCalculateRoute = () => {
     calculateDistance();
   };
@@ -100,7 +105,7 @@ const App = () => {
               </div>
               <label className='text-sm hidden md:block'>Stop</label><br />
               {locations.stops.map((stop, index) => (
-                <div className="relative" key={index}>
+                <div className="relative flex items-center" key={index}>
                   <i className="fa-sharp fa-solid fa-circle-dot absolute left-3 top-[18px] text-black"></i>
                   <input
                     className='w-full pl-10 h-[45px] mt-1 rounded-[6px] p-3 border-[1px] border-[#DCDDEC]'
@@ -108,7 +113,13 @@ const App = () => {
                     value={stop}
                     onChange={(e) => handleStopChange(index, e.target.value)}
                     placeholder={`Stop ${index + 1}`}
-                  /><br />
+                  />
+                  <button
+                    className="ml-5 text-red-500"
+                    onClick={() => handleDeleteStop(index)}
+                  >
+                    <i className="fa fa-trash"></i>
+                  </button>
                 </div>
               ))}
               <div className='flex justify-end w-full'>
